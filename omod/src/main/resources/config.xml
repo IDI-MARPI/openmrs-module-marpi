@@ -32,6 +32,24 @@
 		<require_module version="${appuiVersion}">
 			org.openmrs.module.appui
 		</require_module>
+		<require_module>
+            org.openmrs.module.formentryapp
+        </require_module>
+        <require_module>
+            org.openmrs.module.htmlformentry
+        </require_module>
+        <require_module>
+            org.openmrs.module.htmlformentryui
+        </require_module>
+		<require_module>
+			org.openmrs.module.referenceapplication
+		</require_module>
+        <require_module>
+            org.openmrs.module.registrationapp
+        </require_module>
+        <require_module >
+            org.openmrs.module.dataexchange
+        </require_module>
 	</require_modules>
 	
 	<!-- Extensions -->

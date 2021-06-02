@@ -15,8 +15,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.BaseModuleActivator;
-import org.openmrs.module.marpi.inntializer.ConceptsInitializer;
-import org.openmrs.module.marpi.inntializer.HtmlFormsInitializer;
+import org.openmrs.module.marpi.inntializer.FormsInitializer;
 import org.openmrs.module.marpi.inntializer.Initializer;
 
 /**
@@ -52,10 +51,10 @@ public class MarpiActivator extends BaseModuleActivator {
 	}
 	
 	private List<Initializer> getInitializers() {
-		List<Initializer> l = new ArrayList<Initializer>();
-		l.add(new ConceptsInitializer());
-		l.add(new HtmlFormsInitializer(MarpiConstants.MODULE_ID));
-		return l;
+		List<Initializer> list = new ArrayList<Initializer>();
+		//list.add(new ConceptsInitializer());
+		list.add(new FormsInitializer(MarpiConstants.MODULE_ID));
+		return list;
 	}
 	
 }
