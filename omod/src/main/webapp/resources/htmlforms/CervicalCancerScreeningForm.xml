@@ -1,0 +1,156 @@
+<htmlform formName="Cervical Cancer Screening Form"
+          formDescription="Used To Capture Patient Visit Data on Cervical Cancer Screening"
+          formEncounterType="14dc8332-666c-45e7-af79-c0dbeae49b07"
+          formUuid="b43959e1-e915-458d-a243-a3540675e996"
+          formVersion="1.0"
+          formAddMetadata="yes"
+          formUILocation="patientDashboard.visitActions"
+          formOrder="22"
+          formIcon="icon-medkit"
+          formShowIf="(visit.active || !visit.active) &amp;&amp; patient.person.dead==false"
+          formDisplayStyle="Standard"
+          formLabel="Cervical Cancer Screening Form">
+    <redirectOnSave
+            url="/coreapps/patientdashboard/patientDashboard.page?patientId={{patient.id}}&amp;encounterId={{encounter.id}}#visits"/>
+
+    <style>
+
+        form label, .form label {
+            float: left;
+            padding: 0px 10px 0 0;
+        }
+
+
+form input[type="checkbox"], form input[type="radio"], .form input[type="checkbox"], .form input[type="radio"] {
+	margin: 2px 5px;
+}
+
+        table td {
+            background: #FFFFFF;
+            color: #404040;
+            vertical-align: top;
+        }
+
+        form select, .form select {
+            min-width: 0px;
+        }
+
+        form input, form select, form textarea, form ul.select, .form input, .form select, .form textarea, .form
+        ul.select {
+            background-color: #FBFBFB;
+            border: 1px solid #CEC9C9;
+            border-radius: 5px;
+            margin-bottom: 0px;
+            padding: 3px;
+            min-width: auto;
+            display: inline-block;
+        }
+
+        .row {
+            width: 100%;
+            float: left;
+            display: inline-flex;
+            clear: both;
+        }
+
+        .row .row-col2 {
+            float: left;
+            width: 50%;
+        }
+
+        table th, table td {
+            border: 1px solid #AFAFAF;
+        }
+
+       table.borderLess, table.borderLess tr, table.borderLess td {
+           border: none;
+       }
+
+      form input[type="radio"], .form input[type="radio"] {
+	margin: 3px;
+}
+    </style>
+
+    <div class="ai-page-frame">
+        <div class="headers" style="text-align: center;">
+            <h3 style="background: #FFFF7D; padding: 10px;">Cervical Cancer Screening Form</h3>
+        </div>
+        <section>
+            <table>
+                <tbody>
+               <tr>
+                    <td>
+                        <label><strong>1. Date of Visit:</strong></label><br/>
+                        <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>2. Parity:</strong></label><br/>
+                          <obs conceptId="1000167" />
+                    </td>
+               </tr>
+                <tr>
+                    <td>
+                        <label><strong>3. Sero Status:</strong></label><br/>
+                          <obs conceptId="90253" answerConceptIds="90166,90167" answerLabels="Pos,Neg" />
+                    </td>
+               </tr>
+                <tr>
+                    <td>
+                        <label><strong>4. Previous Screening</strong></label><br/>
+                        <obs conceptId="1000168" answerConceptIds="90003,90004" style="radio" answerLabels="Yes,No"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                       <label><strong>5. Date of Previous Screening</strong></label><br/>
+                        <obs conceptId="1000169" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>6. Reason for Screening:</strong></label>
+                             <obs conceptId="1000170" />
+                   </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>7. VIA Results</strong></label>
+                        <obs conceptId="1000171" answerConceptIds="664,703,1000172,1000173,149" answerLabels="Pos,Neg,Highly Suspicious,Invassive,Cervicitis"/>
+                   </td>
+                </tr>
+               <tr>
+                    <td>
+                        <label><strong>8. Status of Cervix:</strong></label><br/>
+                        <obs conceptId="1000174" />
+                    </td>
+                </tr>     
+                <tr>
+                    <td>
+                        <label><strong>9. Comments:</strong></label><br/>
+                                  <obs id="br" conceptId="1000175" rows="2" cols="80" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label><strong>10. Attending Nurse:</strong></label><encounterProvider required="true"/><span class="required">*</span>
+                    </td>
+                <span style="display: none;">
+                        <encounterLocation default="629d78e9-93e5-43b0-ad8a-48313fd99117"
+                                           order="629d78e9-93e5-43b0-ad8a-48313fd99117"/>
+                        </span>
+                </tr>
+                <tr>
+                     <td>
+                        <label><strong>11. Return Date:</strong></label><br/>
+                                  <obs conceptId="5096" allowFutureDates="true"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <submit/>
+        </section>
+    </div>
+</htmlform>

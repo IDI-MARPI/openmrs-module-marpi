@@ -23,15 +23,15 @@ import org.openmrs.ui.framework.resource.ResourceProvider;
  * Sets up the HFE forms 1) Scans the webapp/resources/htmlforms folder 2) Attempts to create an HFE
  * form from each of the files 3) Adds the forms as in Configure Metadata \ Manage Forms
  */
-public class HtmlFormsInitializer implements Initializer {
+public class FormsInitializer implements Initializer {
 	
-	protected static final Log log = LogFactory.getLog(HtmlFormsInitializer.class);
+	protected static final Log log = LogFactory.getLog(FormsInitializer.class);
 	
 	protected static final String formsPath = "htmlforms/";
 	
 	protected String providerName;
 	
-	public HtmlFormsInitializer(String newProviderName) {
+	public FormsInitializer(String newProviderName) {
 		this.providerName = newProviderName;
 	}
 	

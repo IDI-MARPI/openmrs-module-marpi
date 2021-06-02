@@ -1,0 +1,848 @@
+<htmlform 
+formName="INDIVIDUAL SERVICE TRACKING - KEY POPULATION FORM 001" 
+formDescription="INDIVIDUAL SERVICE TRACKING - KEY POPULATION FORM" 
+formEncounterType="b516b21b-afe1-4e12-87e6-358f270d83b9" 
+formUuid="b863c25f-c693-412d-b266-0fdc50c7f428" 
+formVersion="1.0" 
+formAddMetadata="yes" 
+formUILocation="patientDashboard.visitActions" 
+formOrder="19" 
+formIcon="icon-medkit" 
+formShowIf="(visit.active || !visit.active) &amp;&amp; patient.person.dead==false" 
+formDisplayStyle="Standard" 
+formLabel="INDIVIDUAL SERVICE TRACKING - KEY POPULATION FORM">
+<redirectOnSave 
+  url="/coreapps/patientdashboard/patientDashboard.page?patientId={{patient.id}}&amp;encounterId={{encounter.id}}#visits" />
+
+    <style>
+        #uicParameters {
+            visibility: hidden;
+        }
+        
+        form label,
+        .form label {
+            float: left;
+            padding: 0px 10px 0 0;
+        }
+        
+        form input[type="checkbox"],
+        form input[type="radio"],
+        .form input[type="checkbox"],
+        .form input[type="radio"] {
+            margin: 2px 5px;
+        }
+        
+        table td {
+            background: #FFFFFF;
+            color: #404040;
+            vertical-align: top;
+        }
+        
+        form select,
+        .form select {
+            min-width: 0px;
+        }
+        
+        form input,
+        form select,
+        form textarea,
+        form ul.select,
+        .form input,
+        .form select,
+        .form textarea,
+        .form ul.select {
+            background-color: #FBFBFB;
+            border: 1px solid #CEC9C9;
+            border-radius: 5px;
+            margin-bottom: 0px;
+            padding: 3px;
+            min-width: auto;
+            display: inline-block;
+        }
+        
+        .row {
+            width: 100%;
+            float: left;
+            display: inline-flex;
+            clear: both;
+        }
+        
+        .row .row-col2 {
+            float: left;
+            width: 50%;
+        }
+        
+        table th,
+        table td {
+            border: 1px solid #AFAFAF;
+        }
+        
+        table.borderLess,
+        table.borderLess tr,
+        table.borderLess td {
+            border: none;
+        }
+        
+        form input[type="radio"],
+        .form input[type="radio"] {
+            margin: 3px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function enable_disable_fpm(enableDisable_fpmethod) {
+
+            var fp_combo = $(enableDisable_fpmethod).find('select');
+
+            var selected_value = jQuery.trim(fp_combo.find(":selected").text());
+
+            var disable = selected_value.toUpperCase() != "YES"
+            $(".EnableDisablefpmethodchild").find("input").attr("disabled", disable);
+
+        }
+
+        function enable_disable_partner(enableDisable_partner) {
+
+            var fp_combo = $(enableDisable_partner).find('select');
+
+            var selected_value = jQuery.trim(fp_combo.find(":selected").text());
+
+            var disable = selected_value.toUpperCase() != "YES"
+            $(".EnableDisablepartnerchild").find("input").attr("disabled", disable);
+
+        }
+
+        function enable_disable_ati(selected_option) {
+
+            var class_name = jq(selected_option).attr("class");
+
+            var length = class_name.length;
+
+            var class_id = parseInt(class_name.substring(length - 1, length))
+
+            var row_id = class_id;
+
+            var disable = true;
+
+            var row_1 = '[class^="HCT"][class*="Child1"]';
+            var row_2 = '[class^="HCT"][class*="Child2"]';
+            var row_3 = '[class^="HCT"][class*="Child3"]';
+            var row_4 = '[class^="HCT"][class*="Child4"]';
+            var row_5 = '[class^="HCT"][class*="Child5"]';
+            var row_6 = '[class^="HCT"][class*="Child6"]';
+
+            var xx = row_1;
+            var selected_value = jq(selected_option).find(":selected").text()
+
+            selected_value = selected_value.trim().toUpperCase();
+
+            if (selected_value.toLowerCase() == "yes")
+                disable = false;
+
+            switch (row_id) {
+                case 1:
+                    xx = row_1;
+                    break;
+                case 2:
+                    xx = row_2;
+                    break;
+                case 3:
+                    xx = row_3;
+                    break;
+                case 4:
+                    xx = row_4;
+                    break;
+
+                case 5:
+                    xx = row_5;
+                    break;
+                case 6:
+                    xx = row_6;
+                    break;
+
+            }
+
+            jq(xx).each(function() {
+                var group = jq(this);
+                if (class_name.indexOf('Child') == -1) {
+                    /* group.find("input").attr("value", ""); */
+                    group.find("input").attr("disabled", disable);
+                    /* group.find('select').prop("selectedIndex", 0); */
+                    group.find('select').attr("disabled", disable);
+                }
+                if (disable) {
+                    /* fade out the fields that are disabled */
+                    group.find("input").fadeTo(250, 0.25);
+                    group.find("select").fadeTo(250, 0.25);
+                } else {
+                    /* remove the fade on the fields */
+                    group.find("input").fadeTo(250, 1);
+                    group.find("select").fadeTo(250, 1);
+                }
+            });
+        }
+
+        if (jQuery) {
+            $(document).ready(function() {
+                if ($.browser.msie) {
+                    $(":checkbox").click(function() {
+                        $(this).change();
+                    });
+                }
+
+                jq('[class^="HCTEnableDisable"]').change(function() {
+                    enable_disable_ati(jq(this));
+                });
+
+                jq('[class^="HCTEnableDisable"]').each(function() {
+                    enable_disable_ati(jq(this))
+                });
+            });
+
+        }
+    </script>
+    <div class="ai-page-frame">
+        <div class="headers" style="text-align: center;">
+            <h3 style="background: #FFFF7D; padding: 10px;">INDIVIDUAL SERVICE TRACKING - KEY POPULATION FORM 001</h3>
+            <span id="uicParameters">
+			<span id="ptFirstName"><lookup expression="patient.personName.givenName" id="firstName"/></span>
+            <span id="ptLastName"><lookup expression="patient.personName.familyName" id="lastName"/></span>
+            <span id="ptdateOfBirth"><lookup expression="patient.birthdate" id="dateOfBirth"/></span>
+            </span>
+        </div>
+        <section>
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="3">
+                            <label>Type of referral</label>
+                            <obs id="referralSection" conceptId="1000025" answerConceptIds="978,1000026" answerLabels="1.Self-referral,2.Referred by">
+                                <controls>
+                                    <when value="163166" thenDisplay="#referringPerson" />
+                                </controls>
+                            </obs>
+                            <span id="referringPerson">
+                          <obs conceptId="1000027" labelText="Specify" />
+                          </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Date today (dd/mm/yy):</label>
+                            <encounterDate default="today" disallowMultipleEncountersOnDate="block" />
+                        </td>
+                    <td colspan="2">
+                        <label>Unique Number:</label>
+                        <patient field="identifier" identifierTypeId="821f7ec2-db42-462a-9013-fec02ac9590b"
+                                 required="true" id = "UniqueCodeField" />
+                    </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <obs conceptId="1000028" labelText="Occupation:" />
+                        </td>
+                        <td colspan="2">
+                            <obs conceptId="1000101" id="mothersFirstName" labelText="Mothers names" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Health Facility</label>
+                            <encounterLocation default="629d78e9-93e5-43b0-ad8a-48313fd99117" order="629d78e9-93e5-43b0-ad8a-48313fd99117" />
+                        </td>
+                        <td>
+                            <obs conceptId="1000029" labelText="HSB:" />
+                        </td>
+                        <td>
+                            <obs conceptId="1000102" labelText="District:" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h3></h3>
+            <table class="section-b">
+                <tbody>
+                    <tr>
+                        <td colspan="4" style="width: 20%">
+                            <label><strong>Service Point:</strong></label>
+                            <br/>
+                            <obs conceptId="162893" answerConceptIds="162894,162895" style="radio" answerLabels="Static/Facility, Outreach/Moonlight" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <label><strong>Location of the Service point:</strong></label>
+                            <br/>
+                            <table class="borderLess">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <obs conceptId="1000030" labelText="Village" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1000031" labelText="Parish" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <obs conceptId="1000032" labelText="Subcounty/Division" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1000033" labelText="District" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label>Religion:</label>
+                            <obs id="religionSection" conceptId="1000034" answerConceptIds="1000035,1000036,1000037" answerLabels="Christian, Moslem,Others">
+                                <controls>
+                                    <when value="1000037" thenDisplay="#otherReligionTextBox" />
+                                </controls>
+                            </obs>
+                            <span id="otherReligionTextBox">
+                          <obs conceptId="1000038" labelText="Specify" />
+                      </span>
+                        </td>
+                        <td colspan="2">
+                            <label>Education:</label>
+                            <obs conceptId="99516" answerConceptIds="1107,1000039,1000040,1000041" answerLabels="None,Primary,Secondary,Tertiary" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <label><strong>Vitals:</strong></label>
+                            <br/>
+                            <table class="borderLess">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <obs conceptId="CIEL:5085" id="bp_systolic" labelText="BP:" /> /
+                                            <obs conceptId="CIEL:5086" id="bp_diastolic" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="CIEL:5087" id="heart_rate" showUnits="uicommons.units.perMinute" unitsCssClass="append-to-value" labelText="Pulse:" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="CIEL:5088" id="temperature" showUnits="uicommons.units.degreesCelsius" unitsCssClass="append-to-value" labelText="Temp:" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="CIEL:5089" id="weight" showUnits="uicommons.units.kilograms" unitsCssClass="append-to-value" labelText="Weight:" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <label><strong>Category of Client:</strong></label>
+                            <obs conceptId="1000042" answerConceptIds="1000008,1000043" answerLabels="General Population,Key Population">
+                            </obs>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label><strong>Sex worker:</strong></label>
+                            <br/>
+                            <excludeIf velocityTest="$patient.gender =='M'">
+                                <obs conceptId="1000054" answerConceptId="1000000" answerLabel="FSW" />
+                            </excludeIf>
+                            <br/>
+                            <excludeIf velocityTest="$patient.gender =='F'">
+                                <obs conceptId="1000054" answerConceptId="1000053" answerLabel="MSW" />
+                            </excludeIf>
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000203" answerLabel="Bar girl/Attendant" />
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000204" answerLabel="Call/Con girl" />
+
+                        </td>
+                        <td>
+                            <label><strong>Uniformed personnel:</strong></label>
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000044" answerLabel="Police" />
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000045" answerLabel="Prisons" />
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000046" answerLabel="Army" />
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000047" answerLabel="Others" />
+                        </td>
+                        <td>
+                            <label><strong>Fish folk:</strong></label>
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000048" answerLabel="Fisher Man" />
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000049" answerLabel="Fish Monger" />
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000050" answerLabel="Others" />
+                        </td>
+                        <td>
+                            <excludeIf velocityTest="$patient.gender =='F'">
+                                <obs conceptId="1000054" answerConceptId="1000001" answerLabel="MSM" />
+                            </excludeIf>
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000002" answerLabel="Trans gender" />
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000022" answerLabel="Lesbian" />
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <obs conceptId="1000054" answerConceptId="1000004" answerLabel="PWID" />
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000003" answerLabel="Non-IDU" />
+                        </td>
+                        <td>
+                            <label><strong>Trucker:</strong></label>
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000051" answerLabel="Driver" />
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000052" answerLabel="Ton man" />
+                        </td>
+                        <td colspan="2">
+                            <obs conceptId="1000054" answerConceptId="5622" answerLabel="Other" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <label><strong>Counselor/Social worker summary/comments after session (disclosure, nutrition, risk reduction, FP,PEP,ARVs,myths, etc):</strong></label>
+                            <br/>
+                            <obs id="br" conceptId="1000055" rows="2" cols="80" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h3>Services offered to client Today (Tick in the box on left of the item)</h3>
+            <table class="section-b">
+                <tbody>
+                    <tr>
+                        <td>
+                            <label><strong>Commodities</strong><i>(for each include number, does or pieces provided)</i></label>
+                            <br/>
+                            <obs conceptId="1000058" answerConceptId="190" answerLabel="Condoms" />
+                            <br/>
+                            <br/>
+                            <obs conceptId="1000056" labelText="Male Pcs:" required="true" />
+                            <br/>
+                            <obs conceptId="1000057" labelText="Female Pcs:" required="true" />
+                            <br/>
+                            <obs conceptId="1000058" answerConceptId="90084" answerLabel="Oral contraceptive pills" />
+                            <br/>
+                            <obs conceptId="1000058" answerConceptId="1000059" answerLabel="Emergence Contraception" />
+                            <br/>
+                            <obs conceptId="1000058" answerConceptId="907" answerLabel="Injectable - Depo Provera" />
+                            <br/>
+                            <obs conceptId="1000058" answerConceptId="162961" answerLabel="Implants" />
+                            <br/>
+                            <obs conceptId="1000058" answerConceptId="5275" answerLabel="IUD" />
+                            <br/>
+                            <obs conceptId="1000058" answerConceptId="1000060" answerLabel="Other Contraceptive" />
+                            <br/>
+                            <obs conceptId="1000058" answerConceptId="1000061" answerLabel="Lubricants" />
+                            <br/>
+                            <obs conceptId="1000058" answerConceptId="1000062" answerLabel="HBV drugs" />
+                            <br/>
+                            <obs conceptId="1000058" answerConceptId="1000063" answerLabel="IEC materials" />
+                            <br/>
+                            <obs conceptId="1000058" answerConceptId="1000064" answerLabel="Mosquito net" />
+                            <br/>
+                            <obs conceptId="1000058" answerConceptId="1000065" answerLabel="STI Drugs" />
+                            <br/>
+                            <obs conceptId="1000058" answerConceptId="1085" answerLabel="ARVs" />
+                            <br/>
+                            <obs conceptId="1000058" answerConceptId="1000066" answerLabel="OIs Drugs" />
+                            <br/>
+                        </td>
+                        <td style="width:320px;">
+                            <label><strong>Direct counselling services<i>(BCC/IEC messaging and health education)</i></strong></label>
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="1000067" answerLabel="Risk reduction counselling" />
+                            <br/>
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="1000068" answerLabel="Condom education" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="5490" answerLabel="Psychosocial counselling" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="1000069" answerLabel="Age appropriate messaging" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="1000070" answerLabel="Gender &amp; Sexuality" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="99296" answerLabel="Family planning counselling" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="99056" answerLabel="Post-Exposure Prophylaxis-PEP" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="1000071" answerLabel="Pre-Exposure Prophylaxis-PrEP" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="1000072" answerLabel="ART counselling" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="1000073" answerLabel="PMTCT/EMTCT counselling" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="1000074" answerLabel="HBV counselling" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="1000075" answerLabel="PHDP/PWP/Positive living,Nutrition" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="1000076" answerLabel="ANC,PNC,Immuniz,breastfeeding" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="99170" answerLabel="Safe sex counselling" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="1000077" answerLabel="Cancer of Cervix &amp; breast cancer" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="99405" answerLabel="TB services: counselling &amp; education" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="1000078" answerLabel="Violence prevention &amp; post violence" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="1000079" answerLabel="Harm reduction counselling" />
+                            <br/>
+                            <obs conceptId="1000104" answerConceptId="1000080" answerLabel="Other information given" />
+                            <br/>
+                        </td>
+                        <td style="width:250px;">
+                            <label><strong>Direct Services</strong></label>
+                            <br/>
+                            <obs conceptId="1000105" answerConceptId="99080" answerLabel="HIV Testing" />
+                            <br/>
+                            <obs conceptId="99493" answerConceptIds="90166,90167" labelText="Results" answerLabels="Pos,Neg" />
+                            <br/>
+                            <obs conceptId="1000105" answerConceptId="163004" answerLabel="HIV care,Rx &amp; support" />
+                            <br/>
+                            <obs conceptId="1000105" answerConceptId="1000081" answerLabel="Male circumcision" />
+                            <br/>
+                            <obs conceptId="1000105" answerConceptId="99550" answerLabel="STI screening &amp; mgt" />
+                            <br/>
+                            <obs conceptId="1000105" answerConceptId="99056" answerLabel="PEP" />
+                            <br/>
+                            <obs conceptId="1000105" answerConceptId="1000082" answerLabel="ANC/PNC/EMTCT,Immuniz" />
+                            <br/>
+                            <obs conceptId="1000105" answerConceptId="1000083" answerLabel="OIs Management" />
+                            <br/>
+                            <obs conceptId="1000105" answerConceptId="1000084" answerLabel="GenderBased Violence mgt" />
+                            <br/>
+                            <obs conceptId="1000105" answerConceptId="1000085" answerLabel="Cancer cervix screening" />
+                            <br/>
+                            <obs conceptId="1000105" answerConceptId="1000086" answerLabel="HBV Screening" />
+                            <br/>
+                            <obs conceptId="1000105" answerConceptId="1000087" answerLabel="HIV clinical/lab monitor" />
+                            <br/>
+                            <obs conceptId="1000105" answerConceptId="1000088" answerLabel="TB screening" />
+                            <br/>
+                            <obs conceptId="1000105" answerConceptId="1000089" answerLabel="TB assessment" />
+                            <br/>
+                            <obs conceptId="1000105" answerConceptId="1000090" answerLabel="TB treatment" />
+                            <br/>
+                        </td>
+                        <td style="width:295px;">
+                            <label><strong>Referrals - Tick services referred for</strong></label>
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="5483" answerLabel="Family Planning" />
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="1000091" answerLabel="Pre-abortion care" />
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="1000092" answerLabel="Post-abortion care" />
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="99786" answerLabel="ART rx,care  &amp; support" />
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="1000093" answerLabel="HomeBase/palliative care" />
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="1000090" answerLabel="TB treatment" />
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="99056" answerLabel="PEP" />
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="1000071" answerLabel="PrEP" />
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="5484" answerLabel="Nutritional Support" />
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="1000072" answerLabel="ART counselling" />
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="5488" answerLabel="Adherence counselling" />
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="1000094" answerLabel="Livelihood support" />
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="1000095" answerLabel="HBV vaccination" />
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="1000096" answerLabel="HBV care &amp; treatment" />
+                            <br/>
+                            <obs conceptId="1272" answerConceptId="5622" answerLabel="Others specify below" />
+                            <br/>
+                            <obs conceptId="99267" labelText="other referral" />
+                            <br/>
+                            <obs conceptId="1000097" labelText="Referral outcome" />
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <label><span class="required">*</span>Names of service providers:</label>
+                            1:
+                            <encounterProvider role="Application: Writes Clinical Notes" required="true" />2:
+                            <encounterProvider role="Application: Writes Clinical Notes" required="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <label>Significant positive findings:</label>
+                            <obs conceptId="1000100" rows="2" cols="80" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <label>Complaints, key findings and diagnoses:</label>
+                            <obs conceptId="1000098" rows="1" cols="80" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <label>Treatment:</label>
+                            <obs conceptId="99692" rows="2" cols="80" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <label>Appointment date:<i>(dd/mm/yyyy)</i></label>
+                            <obs id="returndate" conceptId="5096" required="required" allowFutureDates="true" labelText="Return date:" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <label>Issues to review on next visit:</label>
+                            <obs conceptId="1000099" rows="1" cols="80" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <submit/>
+        </section>
+    </div>
+    <script type="text/javascript">
+        jQuery(function() {
+			var uniqueidentifierfield = document.getElementById('w7');
+			uniqueidentifierfield.tabIndex = -1;
+            var dic = 'MAR';
+            var motherNames = getValue('mothersFirstName.value').substring(0, 2);
+            var firstName = document.getElementById("ptFirstName").innerHTML.substring(0, 2);
+            var lastName = document.getElementById("ptLastName").innerHTML.substring(0, 2);
+            var dateOB = document.getElementById("ptdateOfBirth").innerHTML.replace(/\//g, "");
+            var dob = dateOB.toString();
+            var dayOfBirth = dob.slice(0, 2);
+            var mth = dob.slice(2, 5);
+            var mthOfBirth;
+            switch (mth) {
+                case 'Jan':
+                    mthOfBirth = '01';
+                    break;
+                case 'Feb':
+                    mthOfBirth = '02';
+                    break;
+                case 'Mar':
+                    mthOfBirth = '03';
+                    break;
+                case 'Apr':
+                    mthOfBirth = '04';
+                    break;
+                case 'May':
+                    mthOfBirth = '05';
+                    break;
+                case 'Jun':
+                    mthOfBirth = '06';
+                    break;
+                case 'Jul':
+                    mthOfBirth = '07';
+                    break;
+                case 'Aug':
+                    mthOfBirth = '08';
+                    break;
+                case 'Sep':
+                    mthOfBirth = '09';
+                    break;
+                case 'Oct':
+                    mthOfBirth = '10';
+                    break;
+                case 'Nov':
+                    mthOfBirth = '11';
+                    break;
+                case 'Dec':
+                    mthOfBirth = '12';
+                    break;
+            }
+            var yrOfBirth = dob.slice(7, 9);
+            var uniqueIdentifier = dic + '/' + motherNames + '/' + firstName + '/' + lastName + '/' + dayOfBirth + '/' + mthOfBirth + '/' + yrOfBirth;
+            var uniqueIDCode = uniqueIdentifier.toUpperCase();
+            uniqueidentifierfield.value = uniqueIDCode;
+
+            getField('mothersFirstName.value').change(function() {
+                var dic = 'MAR';
+                var motherNames = getValue('mothersFirstName.value').substring(0, 2);
+                var firstName = document.getElementById("ptFirstName").innerHTML.substring(0, 2);
+                var lastName = document.getElementById("ptLastName").innerHTML.substring(0, 2);
+                var dateOB = document.getElementById("ptdateOfBirth").innerHTML.replace(/\//g, "");
+                var dob = dateOB.toString();
+                var dayOfBirth = dob.slice(0, 2);
+                var mth = dob.slice(2, 5);
+                var mthOfBirth;
+                switch (mth) {
+                    case 'Jan':
+                        mthOfBirth = '01';
+                        break;
+                    case 'Feb':
+                        mthOfBirth = '02';
+                        break;
+                    case 'Mar':
+                        mthOfBirth = '03';
+                        break;
+                    case 'Apr':
+                        mthOfBirth = '04';
+                        break;
+                    case 'May':
+                        mthOfBirth = '05';
+                        break;
+                    case 'Jun':
+                        mthOfBirth = '06';
+                        break;
+                    case 'Jul':
+                        mthOfBirth = '07';
+                        break;
+                    case 'Aug':
+                        mthOfBirth = '08';
+                        break;
+                    case 'Sep':
+                        mthOfBirth = '09';
+                        break;
+                    case 'Oct':
+                        mthOfBirth = '10';
+                        break;
+                    case 'Nov':
+                        mthOfBirth = '11';
+                        break;
+                    case 'Dec':
+                        mthOfBirth = '12';
+                        break;
+                }
+                var yrOfBirth = dob.slice(7, 9);
+                var uniqueIdentifier = dic + '/' + motherNames + '/' + firstName + '/' + lastName + '/' + dayOfBirth + '/' + mthOfBirth + '/' + yrOfBirth;
+                var uniqueIDCode = uniqueIdentifier.toUpperCase();
+                uniqueidentifierfield.value = uniqueIDCode;
+            });
+
+            getField('mothersFirstName.value').blur(function() {
+                var dic = 'MAR';
+                var motherNames = getValue('mothersFirstName.value').substring(0, 2);
+                var firstName = document.getElementById("ptFirstName").innerHTML.substring(0, 2);
+                var lastName = document.getElementById("ptLastName").innerHTML.substring(0, 2);
+                var dateOB = document.getElementById("ptdateOfBirth").innerHTML.replace(/\//g, "");
+                var dob = dateOB.toString();
+                var dayOfBirth = dob.slice(0, 2);
+                var mth = dob.slice(2, 5);
+                var mthOfBirth;
+                switch (mth) {
+                    case 'Jan':
+                        mthOfBirth = '01';
+                        break;
+                    case 'Feb':
+                        mthOfBirth = '02';
+                        break;
+                    case 'Mar':
+                        mthOfBirth = '03';
+                        break;
+                    case 'Apr':
+                        mthOfBirth = '04';
+                        break;
+                    case 'May':
+                        mthOfBirth = '05';
+                        break;
+                    case 'Jun':
+                        mthOfBirth = '06';
+                        break;
+                    case 'Jul':
+                        mthOfBirth = '07';
+                        break;
+                    case 'Aug':
+                        mthOfBirth = '08';
+                        break;
+                    case 'Sep':
+                        mthOfBirth = '09';
+                        break;
+                    case 'Oct':
+                        mthOfBirth = '10';
+                        break;
+                    case 'Nov':
+                        mthOfBirth = '11';
+                        break;
+                    case 'Dec':
+                        mthOfBirth = '12';
+                        break;
+                }
+                var yrOfBirth = dob.slice(7, 9);
+                var uniqueIdentifier = dic + '/' + motherNames + '/' + firstName + '/' + lastName + '/' + dayOfBirth + '/' + mthOfBirth + '/' + yrOfBirth;
+                var uniqueIDCode = uniqueIdentifier.toUpperCase();
+                uniqueidentifierfield.value = uniqueIDCode;
+            });
+
+            getField('mothersFirstName.value').keyup(function() {
+                var dic = 'MAR';
+                var motherNames = getValue('mothersFirstName.value').substring(0, 2);
+                var firstName = document.getElementById("ptFirstName").innerHTML.substring(0, 2);
+                var lastName = document.getElementById("ptLastName").innerHTML.substring(0, 2);
+                var dateOB = document.getElementById("ptdateOfBirth").innerHTML.replace(/\//g, "");
+                var dob = dateOB.toString();
+                var dayOfBirth = dob.slice(0, 2);
+                var mth = dob.slice(2, 5);
+                var mthOfBirth;
+                switch (mth) {
+                    case 'Jan':
+                        mthOfBirth = '01';
+                        break;
+                    case 'Feb':
+                        mthOfBirth = '02';
+                        break;
+                    case 'Mar':
+                        mthOfBirth = '03';
+                        break;
+                    case 'Apr':
+                        mthOfBirth = '04';
+                        break;
+                    case 'May':
+                        mthOfBirth = '05';
+                        break;
+                    case 'Jun':
+                        mthOfBirth = '06';
+                        break;
+                    case 'Jul':
+                        mthOfBirth = '07';
+                        break;
+                    case 'Aug':
+                        mthOfBirth = '08';
+                        break;
+                    case 'Sep':
+                        mthOfBirth = '09';
+                        break;
+                    case 'Oct':
+                        mthOfBirth = '10';
+                        break;
+                    case 'Nov':
+                        mthOfBirth = '11';
+                        break;
+                    case 'Dec':
+                        mthOfBirth = '12';
+                        break;
+                }
+                var yrOfBirth = dob.slice(7, 9);
+                var uniqueIdentifier = dic + '/' + motherNames + '/' + firstName + '/' + lastName + '/' + dayOfBirth + '/' + mthOfBirth + '/' + yrOfBirth;
+                var uniqueIDCode = uniqueIdentifier.toUpperCase();
+                uniqueidentifierfield.value = uniqueIDCode;
+            });
+			uniqueidentifierfield.onkeydown = function(){return false;};
+			
+        });
+    </script>
+</htmlform>

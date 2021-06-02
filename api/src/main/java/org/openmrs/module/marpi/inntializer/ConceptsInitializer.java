@@ -25,10 +25,11 @@ public class ConceptsInitializer implements Initializer {
 		if (Integer.valueOf(installedVersion.getPropertyValue()) < MarpiConstants.MARPI_METADATA_VERSION) {
 			
 			Context.flushSession(); //Flush so that purges are not deferred until after data import
-			log.info("Started importing concepts........................................");
+			log.info("Started importing concepts");
 			DataImporter dataImporter = Context.getRegisteredComponent("dataImporter", DataImporter.class);
 			
 			try {
+				//add all the custom concepts to the MarpiConcepts.xml package and uncomment the line below
 				dataImporter.importData("MarpiConcepts.xml");
 			}
 			catch (Exception e) {

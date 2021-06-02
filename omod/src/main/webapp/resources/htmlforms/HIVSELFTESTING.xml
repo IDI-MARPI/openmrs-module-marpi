@@ -1,0 +1,457 @@
+<htmlform
+        formName="HIV SELF TESTING FORM"
+        formDescription="HIV SELF TESTING FORM"
+        formEncounterType="14dc8332-666c-45e7-af79-c0dbeae49453"
+        formUuid="2912251b-611c-4068-8138-5196bbfeb159"
+        formVersion="1.0"
+        formUILocation="patientDashboard.visitActions"
+        formOrder=""
+        formIcon="icon-medkit"
+        formShowIf="(visit.active || !visit.active) &amp;&amp; patient.person.dead==false"
+        formDisplayStyle="Standard"
+        formLabel="HIV SELF TESTING FORM">
+    <redirectOnSave
+            url="/coreapps/patientdashboard/patientDashboard.page?patientId={{patient.id}}&amp;encounterId={{encounter.id}}#visits" />
+
+    <style>
+        #uicParameters {
+        visibility: hidden;
+        }
+
+        form label,
+        .form label {
+        float: left;
+        padding: 0px 10px 0 0;
+        }
+
+        form input[type="checkbox"],
+        form input[type="radio"],
+        .form input[type="checkbox"],
+        .form input[type="radio"] {
+        margin: 2px 5px;
+        }
+
+        table td {
+        background: #FFFFFF;
+        color: #404040;
+        vertical-align: top;
+        }
+
+        form select,
+        .form select {
+        min-width: 0px;
+        }
+
+        form input,
+        form select,
+        form textarea,
+        form ul.select,
+        .form input,
+        .form select,
+        .form textarea,
+        .form ul.select {
+        background-color: #FBFBFB;
+        border: 1px solid #CEC9C9;
+        border-radius: 5px;
+        margin-bottom: 0px;
+        padding: 3px;
+        min-width: auto;
+        display: inline-block;
+        }
+
+        .row {
+        width: 100%;
+        float: left;
+        display: inline-flex;
+        clear: both;
+        }
+
+        .row .row-col2 {
+        float: left;
+        width: 50%;
+        }
+
+        table th,
+        table td {
+        border: 1px solid #AFAFAF;
+        }
+
+        table.borderLess,
+        table.borderLess tr,
+        table.borderLess td {
+        border: none;
+        }
+
+        form input[type="radio"],
+        .form input[type="radio"] {
+        margin: 3px;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        if (jQuery) {
+        jq(document).ready(function () {
+        
+
+        <ifMode mode="EDIT">
+            if( jq("#163243").find("input").val()==''){
+               disable_fields(163243);
+            }
+            if( jq("#163381").find("input").val()==''){
+               disable_fields(163381);
+            }
+            if( jq("#163382").find("input").val()==''){
+                disable_fields(163382);
+            }
+            if( jq("#163383").find("input").val()==''){
+            disable_fields(163383);
+            }
+
+        </ifMode>
+        <ifMode mode="ENTER">
+            disable_fields(163243);
+            disable_fields(163381);
+            disable_fields(163391);
+            jq("#163381").find("input[type$='text']").attr("disabled",true);
+        </ifMode>
+
+
+
+        jq("#163377").change(function () {
+            var test_kits_for_use  = getValue('163377.value');
+        console.log(test_kits_for_use);
+            if(test_kits_for_use == 978 )
+            {
+                disable_fields(163382);
+                disable_fields(163383);
+             }
+           else
+            {
+                enable_fields(163382);
+                enable_fields(163383);
+
+            }
+
+        });
+
+
+
+        // other specify handling
+
+        // other specify handling
+        jq('#163377').change(function () {
+             enable_disable('163377', '163381', '5622');
+        });
+
+
+        jq('#163389').change(function () {
+        enable_disable('163389', '163391', '5622');
+        });
+
+
+        jq('#other_key_population_category').change(function(){
+        if(!jq('#other_key_population_category').find(':checkbox').prop('checked')){
+        jq("#163243").find("input[type$='text']").attr("disabled",true);
+        jq("#163243").find("input[type$='text']").val("");
+        }else{
+        jq("#163243").find("input[type$='text']").attr("disabled",false); }
+        });
+
+        function disable_fields(groupId){
+            var disable = true;
+            var group = jq("#"+groupId);
+            group.find("input").attr("disabled", disable);
+            group.find('select').attr("disabled", disable);
+
+            if (disable) {
+                /* fade out the fields that are disabled */
+                group.find("input").fadeTo(250, 0.25);
+                group.find("select").fadeTo(250, 0.25);
+            } else {
+            /* remove the fade on the fields */
+                group.find("input").fadeTo(250, 1);
+                group.find("select").fadeTo(250, 1);
+            }
+        }
+
+        function enable_fields(group){
+            var disable = false;
+            var group = jq("#"+group);
+            group.find("input").attr("disabled", disable);
+            group.find('select').attr("disabled", disable);
+
+            if (!disable) {
+                /* remove the fade on the fields */
+                group.find("input").fadeTo(250, 1);
+                group.find("select").fadeTo(250, 1);
+            }
+        }
+
+
+
+        function disableContainer(container) {
+            jq(container).find("input").attr("disabled", true);
+            jq(container).find('select').attr("disabled", true);
+        }
+
+
+        function enableContainer(container) {
+            jq(container).find("input").attr("disabled", false);
+            jq(container).find('select').attr("disabled", false);
+        }
+
+        function enable_disable(triggerId, enabledDisabledId, conditionValue) {
+        if (getValue(triggerId + '.value') == conditionValue){
+                enableContainer('#' + enabledDisabledId);
+            }
+            else {
+                if(getValue(enabledDisabledId+'.value')!=''){
+                setValue(enabledDisabledId+'.value', '');
+            }
+                disableContainer('#' + enabledDisabledId);
+            }
+
+        }
+
+        });
+        }
+
+    </script>
+    <div class="ai-page-frame">
+        <div class="headers" style="text-align: center;">
+            <h3 style="background: #FFFF7D; padding: 10px;">HIV SELF TESTING FORM</h3>
+            <span id="uicParameters">
+                <span id="ptFirstName"><lookup expression="patient.personName.givenName" id="firstName"/></span>
+                <span id="ptLastName"><lookup expression="patient.personName.familyName" id="lastName"/></span>
+                <span id="ptdateOfBirth"><lookup expression="patient.birthdate" id="dateOfBirth"/></span>
+            </span>
+        </div>
+        <section>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label><strong>Encounter Date:</strong></label>
+                            <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
+                            <span style="display: none;">
+                                <encounterLocation default="629d78e9-93e5-43b0-ad8a-48313fd99117"
+                                                   order="629d78e9-93e5-43b0-ad8a-48313fd99117"/>
+                            </span>
+                        </td>
+                        <td>
+                            <label><strong>First time to test in last 12 months</strong></label>
+                            <br/>
+                            <obs conceptId="99467" answerConceptIds="1065,1066" style="radio" />
+                        </td>
+                         <excludeIf velocityTest="$patient.gender =='M' ">
+                        <td>
+                            <label><strong>Pregnant </strong></label>
+                            <br/>
+                            <obs conceptId="90041" answerConceptIds="1065,1066" style="radio" />
+                        </td>
+                    </excludeIf>
+                        <td>
+                            <label><strong>Key Population Category</strong></label>
+                            <br/>
+                            <excludeIf velocityTest="$patient.gender =='M' ">
+                                <obs id="163194" conceptId="1000054" answerConceptId="1000000"/>
+                            </excludeIf>
+                            <excludeIf velocityTest="$patient.gender =='F' ">
+                                <obs conceptId="1000054" answerConceptId="1000053"/>
+                            </excludeIf>
+                            <obs conceptId="1000054" answerConceptId="1000217" />
+                            <br/>
+                            <excludeIf velocityTest="$patient.gender =='F' ">
+                                <obs conceptId="1000054" answerConceptId="1000001" />
+                            </excludeIf>
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000002" />
+                            <br/>
+                            <obs conceptId="1000054" answerConceptId="1000218" />
+                            <br/>
+                            <obs id="other_key_population_category" conceptId="1000054" answerConceptId="5622" />
+                            <br/>
+                            <label>
+                                Specify:
+                            </label>
+                            <br/>
+                            <obs id="163243" conceptId="1000103" />
+                        </td>
+                        <td>
+                            <label><strong>Priority Population</strong></label>
+                            <br/>
+                            <obs id="163359" conceptId="1000219" answerConceptIds="1000220,1000006,1000005,5622" style="radio" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label><strong>Type of Kit Issued</strong></label>
+                            <br/>
+                            <obs conceptId="1000206" answerConceptIds="1000207,1000208,1000209,1000210" style="radio" answerLabels="OralQuick,SureCheck,Insti,Mylan" />
+                        </td>
+                        <td>
+                            <label><strong>Community Distribution </strong></label>
+                            <br/>
+                            <obs conceptId="1000211" answerConceptIds="1000215,1000216,162895,1000212,1000213,1000214" style="radio" />
+                        </td>
+                        <td>
+                            <label><strong>Public Health Facility Direct Distribution</strong></label>
+                            <br/>
+                            <obs conceptId="1000221" answerConceptId="1000222"/>
+                            <obs conceptId="1000221" answerConceptId="1000043"/>
+                            <excludeIf velocityTest="$patient.gender =='F' ">
+                                <obs conceptId="1000221" answerConceptId="1000224"/>
+                            </excludeIf>
+                            <excludeIf velocityTest="$patient.gender =='M' ">
+                                <obs conceptId="1000221" answerConceptId="1000225"/>
+                            </excludeIf>
+                            <excludeIf velocityTest="$patient.gender =='M' ">
+                                <obs conceptId="1000221" answerConceptId="1000223"/>
+                            </excludeIf>    
+                        </td>
+                        <td colspan="2">
+                            <label><strong>Private Sector</strong></label>
+                            <br/>
+                            <obs id="163366" conceptId="1000226" answerConceptIds="1000227,1000228,1000229,162920" answerLabels="Pharmacy,DrugShop,Clinic,Workplace" style="radio" />
+                            <br/>
+                            <label><strong>Others </strong></label>
+                            <br/>
+                            <obs id="163370" conceptId="1000230" answerConceptIds="1000231,1000232" style="radio" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label><strong>Testing Information</strong></label>
+                        </td>
+                        <td colspan="4">
+                            <label><strong>Secondary Kit Distribution</strong></label>
+                        </td>
+                        <td colspan="2">
+                            <label><strong>HIV Results</strong></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label><strong>Type of HIVST</strong></label>
+                            <br/>
+                            <obs id="163373" conceptId="1000233" answerConceptIds="1000234,1000235" style="radio" />
+                            <br/>
+                            <label><strong>Number of Kits given out to clients </strong></label>
+                            <br/>
+                            <obs conceptId="1000236" />
+
+                        </td>
+                        <td>
+                            <label><strong>Test Kit Distributed for use by</strong></label>
+                            <br/>
+                            <obs id="163377" conceptId="1000237" answerConceptIds="978,1000238,1000239,90280,1000240,5622" style="radio" />
+                            <br/>
+                            <label>Specify:</label>
+                            <obs id="163381" conceptId="1000241" />
+                        </td>
+                        <td>
+                            <label><strong>If Test Kit for use by any other than self (Age and Sex of User)</strong></label>
+                            <br/>
+                            <label>Age:</label>
+                            <obs id="163382" conceptId="1000242" />
+                            <br/>
+                            <label>Sex:</label>
+                            <obs id="163383" conceptId="1000243" style="radio" />
+                        </td>
+                        <td>
+                            <label><strong>HIV Results (for Secondary Distribution)</strong></label>
+                            <br/>
+                            <obs conceptId="1000244" style="radio" answerConceptIds="1228,1229,1000245" answerLabels="R-Reactive,NR-Non-reactive,INV-Invalid Results"/>
+                        </td>
+                        <td>
+                            <label><strong>Confirmatory Results</strong></label>
+                            <br/>
+                            <obs conceptId="1000246" style="radio" answerConceptIds="1228,1229,1000245" answerLabels="R-Reactive,NR-Non-reactive,INV-Invalid Results"/>
+                        </td>
+                        <td>
+                            <label><strong>HIV Results </strong></label>
+                            <br/>
+                            <obs conceptId="1000247" style="radio" answerConceptIds="1228,1229,1000245" answerLabels="R-Reactive,NR-Non-reactive,INV-Invalid Results"/>
+                        </td>
+                        <td>
+                            <label><strong>Confirmatory Results</strong></label>
+                            <br/>
+                            <obs conceptId="1000248" style="radio" answerConceptIds="1228,1229,1000245" answerLabels="R-Reactive,NR-Non-reactive,INV-Invalid Results"/>
+                        </td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="4">
+                            <label><strong>Post test and followup</strong></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label><strong>HIV negative linked to care </strong></label>
+                            <br/>
+                            <obs  conceptId="1000249" answerConceptId="1000071" answerLabels="PrEP"/>
+                             <excludeIf velocityTest="$patient.gender =='F' ">
+                               <obs  conceptId="1000249" answerConceptId="1000081" answerLabels="VMMC"/>
+                            </excludeIf>
+                            <obs  conceptId="1000249" answerConceptId="90083" answerLabels="Condoms"/>
+                            <obs  conceptId="1000249" answerConceptId="1000250" answerLabels="Decline Referral"/>
+                            <obs id="163389" conceptId="1000249" answerConceptId="5622" answerLabels="Other"/>
+
+                            <br/>
+                            <label><strong>Specify: </strong></label>
+                            <br/>
+                            <obs id="163391" conceptId="1000251" />
+
+                        </td>
+                        <td>
+                            <label><strong>HIV Positive linked to care</strong></label>
+                            <br/>
+                            <obs conceptId="1000252" answerConceptIds="1000253,1000250" style="radio" />
+                            <br/>
+                        </td>
+                        <td>
+                            <label><strong>HIV Positive initiated on ART</strong></label>
+                            <br/>
+                            <obs conceptId="1000254" answerConceptIds="1065,1066"  style="radio"/>
+                        </td>
+                        <td>
+                            <label><strong>Indicate if the client reports the following as a result of HIVST</strong></label>
+                            <br/>
+                            <obs conceptId="1000255" style="radio" />
+                        </td>
+                        <td>
+                            <label>Provider</label>
+                            <encounterProvider role="Provider" style="autocomplete"/>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <submit/>
+        </section>
+    </div>
+</htmlform>
