@@ -1,7 +1,6 @@
 <htmlform 
 formName="INDIVIDUAL SERVICE TRACKING - KEY POPULATION FORM 001" 
 formDescription="INDIVIDUAL SERVICE TRACKING - KEY POPULATION FORM" 
-formEncounterType="b516b21b-afe1-4e12-87e6-358f270d83b9" 
 formUuid="b863c25f-c693-412d-b266-0fdc50c7f428" 
 formVersion="1.0" 
 formAddMetadata="yes" 
@@ -14,80 +13,7 @@ formLabel="INDIVIDUAL SERVICE TRACKING - KEY POPULATION FORM">
 <redirectOnSave 
   url="/coreapps/patientdashboard/patientDashboard.page?patientId={{patient.id}}&amp;encounterId={{encounter.id}}#visits" />
 
-    <style>
-        #uicParameters {
-            visibility: hidden;
-        }
-        
-        form label,
-        .form label {
-            float: left;
-            padding: 0px 10px 0 0;
-        }
-        
-        form input[type="checkbox"],
-        form input[type="radio"],
-        .form input[type="checkbox"],
-        .form input[type="radio"] {
-            margin: 2px 5px;
-        }
-        
-        table td {
-            background: #FFFFFF;
-            color: #404040;
-            vertical-align: top;
-        }
-        
-        form select,
-        .form select {
-            min-width: 0px;
-        }
-        
-        form input,
-        form select,
-        form textarea,
-        form ul.select,
-        .form input,
-        .form select,
-        .form textarea,
-        .form ul.select {
-            background-color: #FBFBFB;
-            border: 1px solid #CEC9C9;
-            border-radius: 5px;
-            margin-bottom: 0px;
-            padding: 3px;
-            min-width: auto;
-            display: inline-block;
-        }
-        
-        .row {
-            width: 100%;
-            float: left;
-            display: inline-flex;
-            clear: both;
-        }
-        
-        .row .row-col2 {
-            float: left;
-            width: 50%;
-        }
-        
-        table th,
-        table td {
-            border: 1px solid #AFAFAF;
-        }
-        
-        table.borderLess,
-        table.borderLess tr,
-        table.borderLess td {
-            border: none;
-        }
-        
-        form input[type="radio"],
-        .form input[type="radio"] {
-            margin: 3px;
-        }
-    </style>
+    
 
     <script type="text/javascript">
         function enable_disable_fpm(enableDisable_fpmethod) {
@@ -201,6 +127,7 @@ formLabel="INDIVIDUAL SERVICE TRACKING - KEY POPULATION FORM">
 
         }
     </script>
+    <encounterType types="10,18" default="18" />
     <div class="ai-page-frame">
         <div class="headers" style="text-align: center;">
             <h3 style="background: #FFFF7D; padding: 10px;">INDIVIDUAL SERVICE TRACKING - KEY POPULATION FORM 001</h3>
