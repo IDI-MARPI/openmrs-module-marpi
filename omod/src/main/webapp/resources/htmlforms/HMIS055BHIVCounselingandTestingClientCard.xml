@@ -61,7 +61,7 @@
 
 
     <script type="text/javascript">
-        function enable_disable_fpm(enableDisable_fpmethod) {
+            function enable_disable_fpm(enableDisable_fpmethod) {
 
             var fp_combo = $(enableDisable_fpmethod).find('select');
 
@@ -154,13 +154,7 @@
             });
         }
 
-        if (jQuery) {
-            $(document).ready(function () {
-                if ($.browser.msie) {
-                    $(":checkbox").click(function () {
-                        $(this).change();
-                    });
-                }
+        jq(function() {
 
                 jq('[class^="HCTEnableDisable"]').change(function () {
                     enable_disable_ati(jq(this));
@@ -170,7 +164,24 @@
                     enable_disable_ati(jq(this))
                 });
             });
-        }
+        
+
+             var showDetails = function(){
+
+                var val = htmlForm.getValueIfLegal('htc.value');
+                    if(val == 162924){
+                         jq('#details').show();
+                    }else{
+                        jq('#details').hide();
+                    }
+              }
+
+           jq(function() {
+                   jq('#details').hide();
+                   getField('htc.value').change(showDetails);          
+            });
+             
+        
     </script>
     <div class="ai-page-frame">
         <div class="headers" style="text-align: center;">
@@ -256,10 +267,11 @@
                     </td>
                     <td colspan="3">
                             <span id="checkboxRadio">
-                                <obs conceptId="162925"
+                                <obs conceptId="162925" id="htc"
                                      answerConceptIds="99416,162920,162921,162922,162923,99056,90012,162924"
-                                     answerLabels="Facility based,Work place,Comm/Out reach,HBHCT,Circumcision (SMC),PEP,PMTCT,MARPS"/>
+                                     answerLabels="Facility based,Work place,Comm/Out reach,HBHCT,Circumcision (SMC),PEP,PMTCT,MARPS"/>                             
                             </span>
+                            <span id="details"><obs conceptId="1000009"  labelText="Types of MARPS"/> </span> 
                     </td>
                 </tr>
                 <tr>
